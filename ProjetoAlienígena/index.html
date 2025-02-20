@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício do Alien</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <style> body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; } </style>
+</head>
+
+<body>
+    <script>
+        // Definindo a altura e largura do jogo e armazenando elas em uma variável
+        const larguraJogo = 700;
+        const alturaJogo = 850;
+
+        // Configurações do jogo Phaser
+        const config = {
+            type: Phaser.AUTO,
+            width: larguraJogo,
+            height: alturaJogo,
+
+            // Ativando a física no jogo
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 300 },
+                    debug: true
+                }
+            },
+
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+
+        // Carrega as configurações do Phaser 
+        const game = new Phaser.Game(config);
+
+        // Variáveis
+        var alien;
+        var teclado;
+        var fogo; 
+        var plataforma;
+
+        function preload() {
+            this.load.image('background', 'assets/bg.png');
+            this.load.image('player', 'assets/alienigena.png');
+            this.load.image('turbo_nave', 'assets/turbo.png');
+            this.load.image('plataforma_tijolo', 'assets/tijolos.png'); 
+        }
+
+        function create() {
+            // Adiciona a imagem de fundo, determinando sua altura e largura como metade da altura e largura determinadas anteriormente
+            this.add.image(larguraJogo/2, alturaJogo/2, 'background');
+
+            // Adionando o "foguinho" do modo turbo
+            fogo = this.add.sprite(0, 0, 'turbo_nave');
+            fogo.setVisible(false); // Controle da visibilidade da imagem do foguinho
+
+            // Criando o alienígena
+            alien = this.physics.add.sprite(larguraJogo/2, 0, 'player');
+            alien.setCollideWorldBounds(true); // ativando os limites físicos da tela 
+
+            //Fazendo o alien se mover com o teclado
+            teclado = this.input.keyboard.createCursorKeys();
+
+            // Adicionando a plataforma (obstáculo)
+            plataforma = this.physics.add.staticImage(larguraJogo/2, alturaJogo/2, 'plataforma_tijolo');
+            this.physics.add.collider(alien, plataforma);
+
+        }
+
+        function update() {
+            
+            // Movimento para a esquerda [ <- ]
+            if (teclado.left.isDown) {
+                alien.setVelocityX(-150); }
+            
+            // Movimento para a direita [ -> ]
+            else if (teclado.right.isDown) {
+                alien.setVelocityX(150); }
+            
+            // Sem movimento horizontal [ x = 0 ]
+            else {
+                alien.setVelocityX(0);
+            }
+
+            // Movimento para cima [^]
+            if (teclado.up.isDown) {
+                alien.setVelocityY(-150); 
+                ativarTurbo();
+            }
+            
+            // Movimento para baixo [ gravidade em y]
+            else {
+                // ação da gravidade do jogo em y
+                semTurbo();
+            }
+
+            // Atualizando a posição do foguinho em relação ao alien
+            fogo.setPosition(alien.x, alien.y + alien.height/2); // O foguinho fica alinhado ao alien e encaixado na parte final dele
+
+        }
+
+        function ativarTurbo() {
+            fogo.setVisible(true);
+        }
+
+        function semTurbo() {
+            fogo.setVisible(false);
+        }
+
+    </script>
+</body>
+</html>
