@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <title>Stefanne Soares</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;  }
+    </style>
+</head>
+<body>
+
+<script>
+
+    // Configuração do jogo no Phaser
+    var config = {
+        type: Phaser.AUTO,  // Phaser decide automaticamente entre tecnologias de randerização
+        width: window.innerWidth,  // Largura da tela do jogo é a mesma do computador
+        height: window.innerHeight,  // Altura da tela do jogo é a mesma do computador
+
+        scene: {  // Define as funções principais do jogo
+            preload: preload,  // Carrega os arquivos 
+            create: create,  // Cria os elemntos na tela
+            update: update  // Atualiza o jogo o tempo todo
+        }
+    };
+
+    var game = new Phaser.Game(config);
+
+    var passarinho; // Variável para o pássaro
+
+    var passarinhoArray = []; // Guarda os pássaros criados
+
+
+    // Carrega os arquivos necessários
+    function preload() {
+        this.load.image('bg', 'assets/bg_céu.jpg'); // Carrega a imagem de fundo 
+        this.load.spritesheet('bird', 'assets/passarinho.png', { // Carrega a imagem do passarinho
+            frameWidth: 171, // Largura de cada quadro da spritesheet
+            frameHeight: 171, // Altura de cada quadro da spritesheet
+
+        });
+    }
+
+
+    // Adiciona os elemntos na tela
+    function create() {
+
+        // Corrige o fundo para ocupar toda a tela
+        let bg = this.add.image(0, 0, 'bg').setOrigin(0, 0); // Adiciona a imagem de fundo
+        bg.displayWidth = this.sys.game.config.width;  // Faz a imagem ficar na mesma largura da tela
+        bg.displayHeight = this.sys.game.config.height;  // Faz a imagem ficar da mesma altura da tela
+       
+        for (let i = 0; i < 3; i++) {  // Adiciona 3 pássaros
+            let x = 100 + i *150; // Define posições diferentes na horizontal
+            let y = 200 + i * 50; // Define posições diferentes na vertical
+
+            let passarinho = this.add.sprite(x, y, 'bird').setScale(0.7); // Adiciona o passarinho na tela
+            passarinho.ida = true; // Adiciona uma propriedade para indicar direção
+            passarinhoArray.push(passarinho); // Adiciona o pássaro no array
+
+            passarinho.anims.play('fly'); // Inicia a animação, fazendo o pássaro bater as asas
+        }
+        
+        // Cria a animação
+        this.anims.create ({
+            key: 'fly', // Nome da animação
+            frames: this.anims.generateFrameNumbers('bird', {start: 0, end: 5}), // Usa os frames de 0 a 5
+            frameRate: 5, // Velocidade da animação (em quadros por segundo)
+            repeat: -1 // Animação em loop infinito
+        });
+
+        
+    }
+
+
+    function update() { 
+
+        let larguraTela = this.sys.game.config.width; // Largura da tela
+        let alturaTela = this.sys.game.config.height; // Altura da tela
+
+        // Definindo os limites para o movimento vertical
+        let limiteSuperior = 100; // Até onde o pássaro pode subir
+        let limiteInferior = alturaTela - 100; // Até onde o pássaro pode descer
+
+        // Percorre todos os pássaros no array
+        for (let i = 0; i < passarinhoArray.length; i++) {
+            let passarinho = passarinhoArray[i];
+
+
+            // Movimento horizontal
+            if (passarinho.x <= 100) {
+                passarinho.setFlip(false, false);
+                passarinho.ida = true;
+            }
+
+            if (passarinho.x >= larguraTela - 100) {
+                passarinho.setFlip(true, false); // Imagem do pássaro refletida
+                passarinho.ida = false;
+            }
+
+            if (passarinho.ida === true) {
+                passarinho.x += 5; // Pássaro vai para a direira
+            } else {
+                passarinho.x -= 5;  // Pássaro vai para a esquerda
+            }
+
+
+            // Movimento vertical
+            if (passarinho.y <= limiteSuperior) { 
+                passarinho.subindo = false; // Quando chega no topo, o pássaro começa a descer
+            }
+
+            if (passarinho.y >= limiteInferior) { 
+                passarinho.subindo = true; // Quando chega embaixo, o pássaro começa a subir
+            }
+
+            if (passarinho.subindo) { 
+                passarinho.y -= 3; // Pássaro sobe
+            } else { 
+                passarinho.y += 3; // Pássaro desce
+            }
+
+        }
+    }
+
+</script>
+
+</body>
+</html>
