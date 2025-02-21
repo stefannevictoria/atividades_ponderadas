@@ -44,8 +44,11 @@
         var fogo; 
         var plataforma = []; // Adiciona o array para que os comandos sejam válidos para todas as plataformas que forem adicionadas
         var moeda;
-        var placar; 
-        var pontuacao = 0;
+        var placarMoedas; 
+        var placarCoracao;
+        var pontuacaoMoedas = 0;
+        var pontuacaoCoracao = 0;
+        var coracao;
 
 
         function preload() {
@@ -54,6 +57,7 @@
             this.load.image('turbo_nave', 'assets/turbo.png');
             this.load.image('plataforma_tijolo', 'assets/tijolos.png'); 
             this.load.image('moeda', 'assets/moeda.png');
+            this.load.image('coracao', 'assets/coracao.png');
         }
 
         function create() {
@@ -82,23 +86,36 @@
             moeda.setBounce(0.7); // Faz a moeda "quicar"
             this.physics.add.collider(moeda, plataforma);
 
-            // Adicionando placar
-            placar = this.add.text(50, 50, 'Moedas:' + pontuacao, {fontSize: '45px', fill: '#495613'});
+            // Adicioanndo coração
+            coracao = this.physics.add.sprite(larguraJogo/2, 0, 'coracao');
+            coracao.setCollideWorldBounds(true); // Barreira na borda da tela
+            coracao.setBounce(0.7); // Faz o coração "quicar"
+            this.physics.add.collider(coracao, plataforma);
 
+            // Adicionando placar
+            placarMoedas = this.add.text(50, 50, 'Moedas:' + pontuacaoMoedas, {fontSize: '45px', fill: '#495613'});
+            placarCoracao = this.add.text(50, 90, 'Coração:' + pontuacaoCoracao, {fontSize: '45px', fill: '#495613'});
 
             // Quando o alien encostar na moeda, será contabilizado e atualizado no placar
             this.physics.add.overlap(alien, moeda, function() {
-
                 moeda.setVisible(false); // Moeda fica invisível
-
-                var posicaoMoeda_Y = Phaser.Math.RND.between(50, 650); // sorteia número
+                var posicaoMoeda_Y = Phaser.Math.RND.between(50, 650); // Sorteia número
                 moeda.setPosition(posicaoMoeda_Y, 100); // Ajusta a posição da moeda
-
-                pontuacao +=1; // Soma a pontuação
-                placar.setText('Moedas:' + pontuacao); // Atualiza texto do placar
-
+                pontuacaoMoedas += 1; // Soma a pontuação correta
+                placarMoedas.setText('Moedas: ' + pontuacaoMoedas); // Atualiza o placar certo
                 moeda.setVisible(true); // Atualiza a visão da nova moeda
             });
+
+            // Quando o alien encostar no coração, será contabilizado e atualizado no placar
+            this.physics.add.overlap(alien, coracao, function() {
+                coracao.setVisible(false); // Coração fica invisível
+                var posicaoCoracao_Y = Phaser.Math.RND.between(50, 650); // Sorteia número
+                coracao.setPosition(posicaoCoracao_Y, 100); // Ajusta a posição do coração
+                pontuacaoCoracao += 1; // Soma a pontuação correta
+                placarCoracao.setText('Coração: ' + pontuacaoCoracao); // Atualiza o placar certo
+                coracao.setVisible(true); // Atualiza a visão do novo coração
+            });
+
 
         }
 
