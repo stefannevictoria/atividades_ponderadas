@@ -24,7 +24,8 @@
             physics: {
                 default: 'arcade',
                 arcade: {
-                    gravity: { y: 300 }
+                    gravity: { y: 300 },
+                    debug: true
                 }
             },
 
@@ -49,8 +50,9 @@
         var pontuacaoMoedas = 0;
         var pontuacaoCoracao = 0;
         var coracao;
+        var passaro;
 
-
+        // Carregar imagens
         function preload() {
             this.load.image('background', 'assets/bg.png');
             this.load.image('player', 'assets/alienigena.png');
@@ -58,7 +60,9 @@
             this.load.image('plataforma_tijolo', 'assets/tijolos.png'); 
             this.load.image('moeda', 'assets/moeda.png');
             this.load.image('coracao', 'assets/coracao.png');
+            this.load.image('passaro', 'assets/pássaro.png');
         }
+
 
         function create() {
             // Adiciona a imagem de fundo, determinando sua altura e largura como metade da altura e largura determinadas anteriormente
@@ -79,6 +83,13 @@
             plataforma.push(this.physics.add.staticImage(larguraJogo/2, alturaJogo/2, 'plataforma_tijolo'));
             plataforma.push(this.physics.add.staticImage(100, 300, 'plataforma_tijolo'));
             this.physics.add.collider(alien, plataforma); // Adicionando a colisão
+
+            // Adicionando pássaro (obstáculo)
+            passaro = this.physics.add.staticImage(500, 100, 'passaro');
+            passaro.setScale(0.4);
+            passaro.setSize(120, 100);
+            passaro.setOffset(100,70);
+            this.physics.add.collider(alien, passaro);
 
             // Adicionando a moeda
             moeda = this.physics.add.sprite(larguraJogo/2, 0, 'moeda');
@@ -151,6 +162,7 @@
 
         }
 
+        // Adicionar funções para ativar e desativar o turbo do fogo
         function ativarTurbo() {
             fogo.setVisible(true);
         }
