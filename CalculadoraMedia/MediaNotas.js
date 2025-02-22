@@ -4,7 +4,7 @@ var nota2 = 9;
 var nota3 = 7; 
 
 // Verificando se as notas estão dentro do intervalo válido
-while (nota1 < 0 || nota1 > 10 || nota2 < 0 || nota2 > 10) {
+while (nota1 < 0 || nota1 > 10 || nota2 < 0 || nota2 > 10 || nota3 < 0 || nota3 > 10) {
     console.log('Valor incompatível. Por favor, insira notas válidas entre 0 e 10.');
     return; // Acaba o código caso o while seja verdadeiro
 }
