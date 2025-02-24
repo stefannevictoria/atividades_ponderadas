@@ -57,6 +57,14 @@
         bg.displayWidth = this.sys.game.config.width;  // Faz a imagem ficar na mesma largura da tela
         bg.displayHeight = this.sys.game.config.height;  // Faz a imagem ficar da mesma altura da tela
        
+        // Cria a animação
+        this.anims.create ({
+            key: 'fly', // Nome da animação
+            frames: this.anims.generateFrameNumbers('bird', {start: 0, end: 5}), // Usa os frames de 0 a 5
+            frameRate: 5, // Velocidade da animação (em quadros por segundo)
+            repeat: -1 // Animação em loop infinito
+        });
+        
         for (let i = 0; i < 3; i++) {  // Adiciona 3 pássaros
             let x = 100 + i *150; // Define posições diferentes na horizontal
             let y = 200 + i * 50; // Define posições diferentes na vertical
@@ -67,14 +75,6 @@
 
             passarinho.anims.play('fly'); // Inicia a animação, fazendo o pássaro bater as asas
         }
-        
-        // Cria a animação
-        this.anims.create ({
-            key: 'fly', // Nome da animação
-            frames: this.anims.generateFrameNumbers('bird', {start: 0, end: 5}), // Usa os frames de 0 a 5
-            frameRate: 5, // Velocidade da animação (em quadros por segundo)
-            repeat: -1 // Animação em loop infinito
-        });
 
         
     }
