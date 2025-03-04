@@ -1,4 +1,4 @@
-# Calculadora de Média Escolar
+# Calculadora de Média Escolar 📚 
 
 Este projeto é um programa simples desenvolvido para calcular a **média das notas** de um aluno com base em três notas e indicar se ele foi **aprovado** ou **reprovado**.
 
