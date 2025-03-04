@@ -1,6 +1,6 @@
 # Projeto do Pássaro 🐦 
 
-Este projeto é um jogo simples desenvolvido com **Phaser.js**, onde pássaros animados voam horizontal e verticalmente em uma tela com fundo dinâmico.
+Este projeto é um jogo simples desenvolvido com **Phaser.js**, em que pássaros animados voam horizontal e verticalmente em uma tela com fundo dinâmico.
 
 ## 📸 Screenshots
 
