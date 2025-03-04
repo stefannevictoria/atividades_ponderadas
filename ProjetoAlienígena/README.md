@@ -2,6 +2,9 @@
 
 Este projeto é um jogo simples desenvolvido com **Phaser.js**, onde um alienígena coleta moedas e corações enquanto desvia de obstáculos.
 
+## 📸 Screenshots
+![Projeto do Alienígena](assets/screenshot.png)
+
 ## 🛠️ Tecnologias Utilizadas
 
 - **JavaScript**: A linguagem de programação principal utilizada no desenvolvimento do jogo.
@@ -30,9 +33,6 @@ Este projeto é um jogo simples desenvolvido com **Phaser.js**, onde um alieníg
 - **Mover para a direita**: Pressione a tecla `→`
 - **Pular / Modo turbo**: Pressione a tecla `↑`
 - **Objetivo**: Colete moedas e corações enquanto evita os obstáculos.
-
-## 📸 Screenshots
-![Projeto do Alienígena](assets/screenshot.png)
 
 ## ✨ Funcionalidades
 
