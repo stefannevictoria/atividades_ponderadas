@@ -5,18 +5,19 @@ import { GameOverScene } from './scenes/gameOver.js';
 // Configurações do jogo Phaser
 const config = {
     type: Phaser.AUTO,
-    width: 850,
-    height: 700,
+    width: 850, // Largura da tela do jogo
+    height: 700, // Altura da tela do jogo
 
     // Ativando a física no jogo
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: { y: 300 }, // Gravidade no eixo y
             debug: false
         }
     },
 
+    // Definindo as cenas do jogo
     scene: [WelcomeScene, GameScene, GameOverScene]
 };
 
