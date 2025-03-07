@@ -131,6 +131,11 @@ export class GameScene extends Phaser.Scene {
         if (this.cursors.up.isDown) {
             this.player.setVelocityY(-400);
         }
+
+        // Verificar se a pontuação chegou a 5
+        if (this.pontuacao >= 5) {
+            this.scene.start("GameOverScene");  // Trocar para a próxima cena
+        }
     }
     
 }
