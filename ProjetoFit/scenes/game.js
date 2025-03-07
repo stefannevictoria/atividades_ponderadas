@@ -11,10 +11,10 @@ export class GameScene extends Phaser.Scene {
     //Fazer carregamento de imagens, sprite e áudio
     preload() { 
         this.load.image('bg', 'assets/background.jpg');
-        this.load.image('brigadeiro', 'assets/brigadeiro.png');
         this.load.image('tomate', 'assets/tomate.png');
         this.load.spritesheet('menina', 'assets/spritesheet_Girl.png', { frameWidth: 149, frameHeight: 270 });
         this.load.image('plataforma', 'assets/alter.png');
+        this.load.image('poeira', 'assets/fumaca.png');
     }
 
 
@@ -24,10 +24,15 @@ export class GameScene extends Phaser.Scene {
         this.alturaJogo = this.sys.game.config.height;  // Usando a configuração do Phaser
 
         //Criar variável pontuação
-        this.pontuacao = 0;
+        this.pontuacaoTomate = 0;
+        this.pontuacaoBrigadeiro = 0;
 
         //Adicionar background
         this.add.image(this.larguraJogo/2, this.alturaJogo/2, 'bg');
+
+        // Adionando a poeira
+        this.poeira = this.add.sprite(0, 0, 'poeira').setScale(0.25);
+        this.poeira.setVisible(false); // Controle da visibilidade da imagem da poeira
 
         //Adicionar sprite da personagem
         this.player = this.physics.add.sprite(this.larguraJogo/2, 100, 'menina').setScale(0.6);
@@ -53,7 +58,7 @@ export class GameScene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
         //Adicionar placar 
-        this.placar = this.add.text(50, 50, 'Pontuacao:' + this.pontuacao, {fontSize:'45px', fill:'#495613'});
+        this.placar = this.add.text(50, 50, 'Pontuacao:' + this.pontuacaoTomate, {fontSize:'45px', fill:'#495613'});
 
         //Adicionar o tomate
         this.tomate = this.physics.add.sprite(this.larguraJogo/3, 0, 'tomate');
@@ -68,11 +73,10 @@ export class GameScene extends Phaser.Scene {
             this.tomate.setVisible(false); //o tomate fica invisível
             var posicaoTomate_Y = Phaser.Math.RND.between(50, 650); //Número sorteado entre 50 e 650
             this.tomate.setPosition(posicaoTomate_Y, 100); //Ajustar a posição do tomate de acordo com o número sorteado
-            this.pontuacao += 1; //Somar pontuação
-            this.placar.setText('Pontuacao: ' + this.pontuacao); //atualiza o placar
-            this.tomate.setVisible(true); //Tornar o alter visível
+            this.pontuacaoTomate += 1; //Somar pontuação
+            this.placar.setText('Pontuacao: ' + this.pontuacaoTomate); //atualiza o placar
+            this.tomate.setVisible(true); //Tornar o tomate visível
         });
-
 
         //Animações da personagem
         this.anims.create({
@@ -109,6 +113,10 @@ export class GameScene extends Phaser.Scene {
             if (this.player.anims.currentAnim?.key !== 'esquerda') {
                 this.player.anims.play('esquerda', true);
             }
+            this.ativarPoeira();
+            this.poeira.setFlipX(true);
+            // Mover a poeira para a direita quando se move para a esquerda
+            this.poeira.setPosition(this.player.x + 30, this.player.y + 50);
         } 
 
         // Movimentação para a direita
@@ -118,6 +126,10 @@ export class GameScene extends Phaser.Scene {
             if (this.player.anims.currentAnim?.key !== 'direita') {
                 this.player.anims.play('direita', true);
             }
+            this.ativarPoeira();
+            this.poeira.setFlipX(false);
+            // Mover a poeira para a esquerda quando se move para a direita
+            this.poeira.setPosition(this.player.x - 30, this.player.y + 50);
         } 
 
         // Se nenhuma tecla for pressionada, fica parado
@@ -126,16 +138,27 @@ export class GameScene extends Phaser.Scene {
             if (this.player.anims.currentAnim?.key !== 'parada') {
                 this.player.anims.play('parada', true);
             }
+            this.semPoeira(); // Desativa o efeito da poeira
         }
     
         if (this.cursors.up.isDown) {
             this.player.setVelocityY(-400);
         }
 
-        // Verificar se a pontuação chegou a 5
-        if (this.pontuacao >= 5) {
-            this.scene.start("GameOverScene1");  // Trocar para a próxima cena
+        // Troca de cena caso atinja a pontuação determinada
+        if (this.pontuacaoTomate >= 5) { // Verificar se a pontuação do tomate chegou a 5
+            this.scene.start("GameOverScene");  // Trocar para a próxima cena
         }
+
+    }
+    
+    // Adicionar funções para ativar e desativar o turbo do fogo
+    ativarPoeira() {
+        this.poeira.setVisible(true);
+    }
+
+    semPoeira() {
+        this.poeira.setVisible(false);
     }
     
 }
