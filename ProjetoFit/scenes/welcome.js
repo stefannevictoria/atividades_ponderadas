@@ -26,7 +26,7 @@ export class WelcomeScene extends Phaser.Scene {
 
         this.settings = this.add.image(this.larguraJogo/2, this.alturaJogo/2, 'fundoSett').setScale(0.7).setVisible(false);
 
-        this.botaoVoltar = this.add.image(700, 100, 'back').setScale(0.6).setVisible(false);
+        this.botaoVoltar = this.add.image(700, 100, 'back').setScale(0.6).setVisible(false).setInteractive();
 
         this.botaoConfig = this.add.image(500, 560, "settings").setScale(0.8).setInteractive();
 
@@ -61,7 +61,7 @@ export class WelcomeScene extends Phaser.Scene {
             this.botaoConfig.setVisible(true);
             this.botaoJogar.setVisible(true);
             this.fundo.setVisible(true);
-            
+            this.botaoVoltar.setVisible(false); // Esconder o botão de voltar
         })
 
         this.botaoJogar.on("pointerover", () => {

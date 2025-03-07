@@ -30,7 +30,7 @@ export class GameScene extends Phaser.Scene {
         this.add.image(this.larguraJogo/2, this.alturaJogo/2, 'bg');
 
         //Adicionar sprite da personagem
-        this.player = this.physics.add.sprite(this.larguraJogo/2, 100, 'menina').setScale(0.8);
+        this.player = this.physics.add.sprite(this.larguraJogo/2, 100, 'menina').setScale(0.6);
         this.player.setCollideWorldBounds(true); // Adiciona os limites da tela
         this.player.body.setGravityY(300); // Aplica gravidade para garantir que ela volte ao chão
 
@@ -58,7 +58,7 @@ export class GameScene extends Phaser.Scene {
         //Adicionar o tomate
         this.tomate = this.physics.add.sprite(this.larguraJogo/3, 0, 'tomate');
         this.tomate.setCollideWorldBounds(true); // "borda no mundo"
-        this.tomate.setScale(0.2);
+        this.tomate.setScale(0.15);
         this.physics.add.collider(this.tomate, this.plataformas[0]); // faz com que o tomate não consiga se sobrepor a plataforma
         this.physics.add.collider(this.tomate, this.plataformas[1]);
         this.physics.add.collider(this.tomate, this.chao);
@@ -134,7 +134,7 @@ export class GameScene extends Phaser.Scene {
 
         // Verificar se a pontuação chegou a 5
         if (this.pontuacao >= 5) {
-            this.scene.start("GameOverScene");  // Trocar para a próxima cena
+            this.scene.start("GameOverScene1");  // Trocar para a próxima cena
         }
     }
     

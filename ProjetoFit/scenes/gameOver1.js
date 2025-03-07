@@ -1,13 +1,13 @@
-export class GameOverScene extends Phaser.Scene {
+export class GameOverScene1 extends Phaser.Scene {
 
     constructor () {
-        super ("GameOverScene")
+        super ("GameOverScene1")
     }
 
     preload () {
         this.load.image('fundo', 'assets/fundoAlt.png');
         this.load.image('jeniffer', 'assets/jeniffer.png');
-        this.load.image('final', 'assets/textos/final.png');
+        this.load.image('ganhou', 'assets/textos/ganhou.png');
         this.load.image('restart', 'assets/botoes/restart.png');
         this.load.image('menu', 'assets/botoes/menu.png');
     }
@@ -18,7 +18,7 @@ export class GameOverScene extends Phaser.Scene {
 
         this.add.image(this.larguraJogo/2, this.alturaJogo/2, 'fundo');
         this.add.image(this.larguraJogo/2, 320, 'jeniffer');
-        this.add.image(this.larguraJogo/2, 120, 'final').setScale(0.6);
+        this.add.image(this.larguraJogo/2, 120, 'ganhou').setScale(0.6);
 
         this.botaoReiniciar = this.add.image(550, 560, 'restart').setScale(0.6).setInteractive();
 

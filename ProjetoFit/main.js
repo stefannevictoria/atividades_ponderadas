@@ -1,6 +1,7 @@
 import { WelcomeScene } from './scenes/welcome.js'
 import { GameScene } from './scenes/game.js';
-import { GameOverScene } from './scenes/gameOver.js';
+import { GameOverScene1 } from './scenes/gameOver1.js';
+import { GameOverScene2 } from './scenes/gameOver2.js';
 
 // Configurações do jogo Phaser
 const config = {
@@ -17,7 +18,7 @@ const config = {
         }
     },
 
-    scene: [WelcomeScene, GameScene, GameOverScene]
+    scene: [WelcomeScene, GameScene, GameOverScene1]
 };
 
 // Carrega as configurações do Phaser 
