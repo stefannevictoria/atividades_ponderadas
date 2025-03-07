@@ -25,7 +25,6 @@ export class GameScene extends Phaser.Scene {
 
         //Criar variável pontuação
         this.pontuacaoTomate = 0;
-        this.pontuacaoBrigadeiro = 0;
 
         //Adicionar background
         this.add.image(this.larguraJogo/2, this.alturaJogo/2, 'bg');
@@ -152,13 +151,13 @@ export class GameScene extends Phaser.Scene {
 
     }
     
-    // Adicionar funções para ativar e desativar o turbo do fogo
+    // Adicionar funções para ativar e desativar o turbo da poeira
     ativarPoeira() {
         this.poeira.setVisible(true);
     }
 
     semPoeira() {
-        this.poeira.setVisible(false);
+        this.poeira.setVisible(true);
     }
     
 }
