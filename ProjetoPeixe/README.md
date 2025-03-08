@@ -2,6 +2,8 @@
 
 Este projeto é um jogo simples desenvolvido com **Phaser.js**, onde um peixe segue o movimento do mouse enquanto uma música de fundo é tocada.
 
+**Disponível em:** [Projeto do Peixe](<https://stefannevictoria.github.io/atividades_ponderadas/ProjetoPeixe/>)
+
 ## 📸 Screenshots
 
 ![Projeto do Peixe](assets/screenshot.png)
