@@ -115,6 +115,7 @@ class GameScene2 extends Phaser.Scene {
         this.load.image('backgroundGame2', 'assets/background_game2.png');
         this.load.image('key', 'assets/key.png');
         this.load.image('player', 'player.png');
+        this.load.image('enemy', 'assets/enemy.png');
     }
 
     create() {
@@ -126,6 +127,16 @@ class GameScene2 extends Phaser.Scene {
         this.player = this.physics.add.sprite(100, 100, 'player');
         this.player.setCollideWorldBounds(true); // Adicionando os limites da tela
         this.player.setBounce(0.2);
+        
+        // Adicionando o inimigo
+        this.enemy = this.physics.add.sprite(400, 200, 'enemy');
+        this.enemy.setVelocity(170, 170);
+        this.enemy.setBounce(1, 1);
+        this.enemy.setCollideWorldBounds(true);
+
+        this.physics.add.overlap(this.player, this.enemy, () => {
+            this.scene.start('GameOverScene');
+        });
 
         //Adicionar os controles do teclado
         this.cursors = this.input.keyboard.createCursorKeys();
