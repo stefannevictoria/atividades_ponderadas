@@ -172,7 +172,7 @@ c) Apenas II é verdadeira.
 
 d) Apenas I é verdadeira.
 
-**RESPOSTA:** A alternativa correta é a a). No código, a classe Funcionário herda de Pessoa por meio do "extends", o que permite que 
+**RESPOSTA:** A alternativa correta é a a). No código, a classe Funcionario herda de Pessoa por meio do "extends", o que permite que os atributos de Pessoa possam ser acessados por Funcionario, validando a primeira afirmação. Além disso, o método apresentar() da classe Funcionario sobrepõe o método da classe Pessoa, mas ainda o chama utilizando super.apresentar(), garantindo a exibição das informações herdadas antes de adicionar o salário, tornando verdadeira a segunda afirmação. A última afirmação é falsa, visto que o código funciona corretamente, pois o JavaScript suporta herança de classes. 
 
 ______
 
@@ -183,12 +183,13 @@ ______
 
 a) A asserção é falsa e a razão é verdadeira.
 
-b) A asserção é verdadeira e a razão é falsa.
+***b) A asserção é verdadeira e a razão é falsa.***
 
 c) A asserção é verdadeira e a razão é verdadeira, mas a razão não explica a asserção.
 
 d) A asserção é verdadeira e a razão é verdadeira, e a razão explica a asserção.
 
+**RESPOSTA:** A alternativa correta é a b). O polimorfismo realmente permite que objetos de diferentes classes respondam à mesma mensagem de formas distintas, tornando a asserção verdadeira. No entanto, a razão está errada porque JavaScript não suporta sobrecarga de métodos. O polimorfismo no JavaScript ocorre por sobrescrita de métodos e herança, não por sobrecarga. 
 ______
 
 # Questões dissertativas
@@ -204,6 +205,19 @@ function somaArray(numeros) {
 }
 console.log(somaArray([1, 2, 3, 4]));
 ```
+
+**RESPOSTA:** O código apresentado contém alguns problemas que precisam ser corrigidos. O primeiro erro está no uso de numeros.size, que não é uma propriedade válida para arrays em JavaScript. Para acessar o tamanho de um array, deve-se usar numeros.length. O segundo erro é que a variável soma é sobrescrita a cada iteração do laço, fazendo com que apenas o último valor do array seja considerado, em vez de somar o dobro de todos os números. A solução para isso é inicializar a variável soma antes do laço e, dentro do laço, adicionar o dobro de cada número à variável. Além disso, é importante declarar corretamente a variável i com let ou var para evitar problemas de escopo. O código corrigido ficaria assim:
+```javascript
+function somaArray(numeros) {
+    let soma = 0;  // Inicializa a variável soma antes do laço
+    for (let i = 0; i < numeros.length; i++) {  // Corrige a propriedade do tamanho do array
+        soma += 2 * numeros[i];  // Soma o dobro de cada número
+    }
+    return soma;
+}
+console.log(somaArray([1, 2, 3, 4]));  // Testa o código
+```
+
 ______
 10) Crie um exemplo prático no qual você tenha duas classes:
 
@@ -211,3 +225,39 @@ ______
 - Uma classe `Livro` que herda de `Produto` e modifica o método `calcularDesconto()`, aplicando um desconto de 20% no preço dos livros.
 
 Explique como funciona a herança nesse contexto e como você implementaria a modificação do método na classe `Livro`.
+
+**RESPOSTA:** A classe Produto possui os atributos nome e preco, e um método calcularDesconto() que aplica um desconto fixo de 10% no preço do produto. A classe Livro, que herda de Produto, modifica o método calcularDesconto() para aplicar um desconto de 20% no preço dos livros.
+
+A herança permite que a classe Livro utilize os atributos e métodos da classe Produto. No entanto, a classe Livro pode sobrescrever o método calcularDesconto() para alterar o comportamento de acordo com suas necessidades. Nesse caso, a classe Livro aplica um desconto maior, de 20%, sem modificar a estrutura original da classe Produto.
+
+O código é o seguinte:
+```javascript
+// Definindo a classe Produto
+class Produto {
+  // Construtor da classe Produto que recebe nome e preco como parâmetros
+  constructor(nome, preco) {
+    this.nome = nome;  // Atribui o nome passado para o atributo 'nome' da instância
+    this.preco = preco;  // Atribui o preco passado para o atributo 'preco' da instância
+  }
+
+  // Método calcularDesconto da classe Produto
+  calcularDesconto() {
+    return this.preco * 0.9; // Aplica um desconto de 10% (preço * 0.9) e retorna o valor com desconto
+  }
+}
+
+// Definindo a classe Livro que herda de Produto
+class Livro extends Produto {
+  // Construtor da classe Livro que recebe nome e preco como parâmetros
+  constructor(nome, preco) {
+    super(nome, preco); // Chama o construtor da classe Produto para inicializar 'nome' e 'preco'
+  }
+
+  // Sobrescrevendo o método calcularDesconto da classe Produto
+  calcularDesconto() {
+    return this.preco * 0.8; // Aplica um desconto de 20% (preço * 0.8) e retorna o valor com desconto
+  }
+}
+```
+
+Aqui, a classe Produto define os atributos nome e preco e implementa o método calcularDesconto(), que aplica um desconto de 10%. A classe Livro, ao herdar de Produto, utiliza a palavra-chave super para chamar o construtor da classe Produto, garantindo que o nome e o preço sejam definidos corretamente. Além disso, a classe Livro sobrescreve o método calcularDesconto() para aplicar um desconto de 20%, substituindo o comportamento padrão de 10% definido na classe Produto.
