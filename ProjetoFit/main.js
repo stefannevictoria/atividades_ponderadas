@@ -8,6 +8,11 @@ const config = {
     width: 850, // Largura da tela do jogo
     height: 700, // Altura da tela do jogo
 
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
+
     // Ativando a física no jogo
     physics: {
         default: 'arcade',
