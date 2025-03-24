@@ -119,15 +119,15 @@ I. A herança é utilizada para compartilhar métodos e propriedades entre class
 II. Em JavaScript, a herança é implementada através da palavra-chave `extends`.
 
 
-***a) As duas afirmações são verdadeiras, e a segunda justifica a primeira.***
+a) As duas afirmações são verdadeiras, e a segunda justifica a primeira.
 
-b) As duas afirmações são verdadeiras, mas a segunda não justifica a primeira.
+***b) As duas afirmações são verdadeiras, mas a segunda não justifica a primeira.***
 
 c) A primeira afirmação é verdadeira, e a segunda é falsa.
 
 d) A primeira afirmação é falsa, e a segunda é verdadeira.
 
-**RESPOSTA:** A alternativa correta é a a), visto que ambas as afirmações são verdadeiras. Em POO, a herança permite compartilhar métodos entre as classes. Como "extends" é a palavra-chave que possibilita a herança, ele é o mecanismo pelo qual métodos e propriedades são compartilhados entre classes, confirmando o que foi dito na primeira afirmação.
+**RESPOSTA:** A alternativa correta é a b), visto que ambas as afirmações são verdadeiras. Em POO, a herança permite compartilhar métodos entre as classes. Entretanto, a palavra-chave `extends` é utilizada para implementar herança, mas por si só não justifica o conceito de herança.
 
 ______
 **7) Dado o seguinte código. Indique a alternativa correta e justifique sua resposta.**
@@ -206,7 +206,7 @@ function somaArray(numeros) {
 console.log(somaArray([1, 2, 3, 4]));
 ```
 
-**RESPOSTA:** O código apresentado contém alguns problemas que precisam ser corrigidos. O primeiro erro está no uso de numeros.size, que não é uma propriedade válida para arrays em JavaScript. Para acessar o tamanho de um array, deve-se usar numeros.length. O segundo erro é que a variável soma é sobrescrita a cada iteração do laço, fazendo com que apenas o último valor do array seja considerado, em vez de somar o dobro de todos os números. A solução para isso é inicializar a variável soma antes do laço e, dentro do laço, adicionar o dobro de cada número à variável. Além disso, é importante declarar corretamente a variável i com let ou var para evitar problemas de escopo. O código corrigido ficaria assim:
+**RESPOSTA:** O código apresentado contém alguns erros. O primeiro erro está no uso de numeros.size, que não é uma propriedade válida para arrays em JavaScript. Para acessar o tamanho de um array, deve-se usar numeros.length. O segundo erro é que a variável soma é sobrescrita a cada iteração do laço, fazendo com que apenas o último valor do array seja considerado, em vez de somar o dobro de todos os números. A solução para isso é inicializar a variável soma antes do laço e, dentro do laço, adicionar o dobro de cada número à variável. Além disso, é importante declarar corretamente a variável i com let ou var para evitar problemas de escopo. O código corrigido ficaria assim:
 ```javascript
 function somaArray(numeros) {
     let soma = 0;  // Inicializa a variável soma antes do laço
@@ -219,6 +219,7 @@ console.log(somaArray([1, 2, 3, 4]));  // Testa o código
 ```
 
 ______
+
 10) Crie um exemplo prático no qual você tenha duas classes:
 
 - Uma classe `Produto` com atributos `nome` e `preco`, e um método `calcularDesconto()` que aplica um desconto fixo de 10% no preço do produto.
