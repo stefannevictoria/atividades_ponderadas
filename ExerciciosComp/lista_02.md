@@ -195,7 +195,7 @@ Dispositivo 4 não pode ser ligado. Energia insuficiente.
 Dispositivo 5 não pode ser ligado. Energia insuficiente.
 
 
-**RESPOSTA:** A alternativa correta é a d). Na estrutura de repetição for, as condições serão avaliadas e o valor da variável consumo atualizada. Assim, no dispositivo 1, 
+**RESPOSTA:** A alternativa correta é a d). Isso porque, no código, a dispositivo 1 será ligado, consumindo 300 unidades de energia (restando 900). O dispositivo 2 consumirá 600 unidades (restando 300). O dispositivo 3 consumirá as 300 restantes e, para ser ligado, usará 200 da bateria extra (restando 200 na bateria). O dispositivo 4 não pode ser ligado pois consome 400 e só há 200 disponíveis. O mesmo vale para o dispositivo 5.
 
 ______
 
@@ -247,7 +247,7 @@ Implemente um pseudocódigo que receba o valor total da compra e exiba a classif
 
 **RESPOSTA:** O código é o seguinte: 
 ```
-    variável totalCompra = 40
+    variável totalCompra
 
     Se totalCompra < 50 então: 
         Retornar "Frete não disponível!"
@@ -275,6 +275,50 @@ Método CalcularConsumo():
 ```
 Implementação genérica para cálculo de consumo, a ser sobrescrita pelas subclasses.
 Agora, implemente as classes Carro e Moto, garantindo que ambas herdem de Veiculo e possuam métodos específicos para calcular o consumo de combustível com base na quilometragem e eficiência do veículo.
+
+**RESPOSTA:** 
+```
+Classe Veiculo
+    Atributos:
+        modelo
+        ano
+
+    Método Construtor(modelo, ano)
+        Definir modelo ←  modelo
+        Definir ano ←  ano
+
+    Método CalcularConsumo()
+        Retornar "O veículo ", modelo, "é de ", ano
+
+Classe Carro herda Veiculo
+    Atributos:
+        quilometragem
+        eficiencia
+
+    Método Construtor(modelo, ano, quilometragem, eficiencia)
+        Chamar super(modelo, ano)
+        Definir quilometragem ←  quilometragem
+        Definir eficiencia ← eficiencia
+
+    Método CalcularConsumo()
+        Definir consumo = quilometragem / eficiencia
+        Retornar "O carro ", modelo, ano, "consumiu ", consumo, "L de combustível para ", quilometragem, "km."
+
+Classe Moto herda Veiculo
+    Atributos:
+        quilometragem
+        eficiencia
+
+    Método Construtor(modelo, ano, quilometragem, eficiencia)
+        Chamar super(modelo, ano)
+        Definir quilometragem ← quilometragem
+        Definir eficiencia ← eficiencia
+
+    Método CalcularConsumo()
+        Definir consumo = quilometragem / eficiencia
+        Retornar "A moto ", modelo, ano, "consumiu ", consumo, "L de combustível para ", quilometragem, "km."
+
+```
 ______
 
 **9)** Você é um cientista da NASA e está ajudando no desenvolvimento de um sistema de pouso para sondas espaciais em Marte. Seu objetivo é calcular o tempo necessário para que a sonda reduza sua velocidade até um nível seguro para pouso, considerando uma velocidade inicial de entrada na atmosfera marciana e uma taxa de desaceleração constante causada pelo atrito atmosférico e retrofoguetes.
@@ -291,11 +335,19 @@ Seu programa deve determinar quanto tempo será necessário para que a sonda ati
 
 **RESPOSTA:**
 ```
-    velocidadeInicial = 1200
-    desaceleracao <= 87
-    tempo <= 3200
+    Entrada: velocidadeInicial, desaceleracao, tempoMaximo, velocidadeSegura
 
-    velocidade = velocidadeInicial - desaceleracao * tempo
+    tempo = 0
+    velocidade = velocidadeInicial
+
+    Enquanto velocidade > velocidadeSegura e tempo < tempoMaximo faça:
+        velocidade = velocidadeInicial - desaceleracao * tempo
+        tempo = tempo + 1
+
+    Se velocidade <= velocidadeSegura então
+        Retornar "Pouso seguro alcançado em " + tempo + " segundos."
+    Senão
+        Retornar "Tempo máximo excedido. Ajuste a desaceleração."
 ```
 ______
 
@@ -311,12 +363,14 @@ Função SomarMatrizesInvestimento(matrizA, matrizB):
     Senão:  
         linhas <- tamanho(matrizA)  
         colunas <- tamanho(matrizA[0])  
-        matrizResultado <- novaMatriz(linhas, colunas)  
+        matrizResultado <- novaMatriz(linhasA, colunasB)  
 
         # Loop para percorrer cada elemento das matrizes e calcular a soma  
-        Para i de 0 até linhas-1 faça:  
-            Para j de 0 até colunas-1 faça:  
-                matrizResultado[i][j] <- matrizA[i][j] + matrizB[i][j]  
+        Para i de 0 até linhasA-1 faça:  
+            Para j de 0 até colunasB-1 faça:  
+                matrizResultado[i][j] <- 0  
+                Para k de 0 até colunasA-1 faça:  
+                    matrizResultado[i][j] <- matrizResultado[i][j] + (matrizA[i][k] * matrizB[k][j])  
 
         Retornar matrizResultado  
 
@@ -329,3 +383,36 @@ Escrever("Total de investimentos acumulados:")
 ImprimirMatriz(totalInvestimentos)  
 ```
 Agora, implemente a função MultiplicarMatrizesInvestimento(matrizA, matrizB), que multiplica as duas matrizes, simulando o efeito de diferentes fatores de crescimento e impacto financeiro nos investimentos ao longo do tempo.
+
+
+**RESPOSTA:**
+
+```
+Função MultiplicarMatrizesInvestimento(matrizA, matrizB):
+    Se número de colunas de matrizA ≠ número de linhas de matrizB então:
+        Retornar "As matrizes não podem ser multiplicadas. Elas tem dimensões diferentes."
+
+    linhasA <- tamanho(matrizA)
+    colunasA <- tamanho(matrizA[0])
+    colunasB <- tamanho(matrizB[0])
+
+    matrizResultado <- novaMatriz(linhasA, colunasB, inicializada com zeros)
+
+    Para i de 0 até linhasA - 1 faça:
+        Para j de 0 até colunasB - 1 faça:
+            Para k de 0 até colunasA - 1 faça:
+                matrizResultado[i][j] <- matrizResultado[i][j] + matrizA[i][k] * matrizB[k][j]
+
+    Retornar matrizResultado
+
+
+# Exemplo de uso da função  
+investimentosAno1 <- [[1000, 2000], [1500, 2500]]  
+investimentosAno2 <- [[1200, 1800], [1300, 2700]]  
+
+totalInvestimentos <- MultiplicarMatrizesInvestimento(investimentosAno1, investimentosAno2)  
+Escrever("Total de investimentos multiplicados:")  
+ImprimirMatriz(totalInvestimentos)  
+
+```
+

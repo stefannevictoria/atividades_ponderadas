@@ -1,20 +1,19 @@
-function analisarCredito1() {
-    var compras = [2500, 1200, 800, 100];
-    var totalCompras = compras[0];
-    var limite = 5000;
-    var status = 'aprovado';
-    var saldoDisponivel = 0;
-    var i = 1;
+//EX04
+var energiaDisponivel = 1200;
+var bateriaExtra = 400;
+var consumoDispositivos = [300, 600, 500, 200, 400];
 
-    do {
-        totalCompras += compras[i];
-        i++;
-    } while (limite >= totalCompras && i < compras.length);
+for (var i = 0; i < consumoDispositivos.length; i++) {
+    var consumo = consumoDispositivos[i];
 
-    saldoDisponivel = limite - totalCompras;
-
-    if (saldoDisponivel < 0) {
-        status = 'negado';
+    if (consumo <= energiaDisponivel) {
+        console.log("Dispositivo " + (i+1) + " ligado. Energia restante: " + (energiaDisponivel - consumo));
+        energiaDisponivel -= consumo;
+    } else if (consumo <= energiaDisponivel + bateriaExtra) {
+        console.log("Dispositivo " + (i+1) + " ligado com bateria extra. Energia restante: " + ((energiaDisponivel + bateriaExtra) - consumo));
+        energiaDisponivel = 0;
+        bateriaExtra -= (consumo - energiaDisponivel);
+    } else {
+        console.log("Dispositivo " + (i+1) + " não pode ser ligado. Energia insuficiente.");
     }
-    console.log(`Seu crédito foi ${status}. Saldo disponível: ${saldoDisponivel}.`);
 }
