@@ -32,8 +32,8 @@ C) O código avalia a expressão booleana, imprime `true` e, em seguida, verific
 
 D) O código avalia a expressão booleana, imprime `false` e ordena os valores em ordem crescente.
 
-**RESPOSTA:** A alternativa correta é a a). No código, a expressão bolleana irá avaliar se a divisão de p por q dá resto 1, e se r vezes 2 é maior que p, ou q + r é menor que p. Como a divisão 10/3 (p/q) dá resto 1, e 12 (2*r) é maior que 10 (p) e 9 (p+r) é menor que 10 (p), a expressão é verdadeira e, portanto, imprimirá "true". 
-Na segunda parte do código, ocorrerá a multiplicação de todos os valores da lista valores, isto é 3*6*9*12*15, e esse valor será impresso.
+**RESPOSTA:** A alternativa correta é a a). No código, a expressão bolleana irá avaliar se a divisão de p por q dá resto 1, e se r vezes 2 é maior que p, ou q + r é menor que p. Como a divisão 10/3 (p/q) dá resto 1, e 12 ($2 \cdot r$) é maior que 10 (p) e 9 (p+r) é menor que 10 (p), a expressão é verdadeira e, portanto, imprimirá "true". 
+Na segunda parte do código, ocorrerá a multiplicação de todos os valores da lista valores, isto é $3 \cdot 6 \cdot 9 \cdot 12 \cdot 15$, e esse valor será impresso.
 
 ______
 
