@@ -392,11 +392,11 @@ Função MultiplicarMatrizesInvestimento(matrizA, matrizB):
     Se número de colunas de matrizA ≠ número de linhas de matrizB então:
         Retornar "As matrizes não podem ser multiplicadas. Elas tem dimensões diferentes."
 
-    linhasA <- tamanho(matrizA)
-    colunasA <- tamanho(matrizA[0])
-    colunasB <- tamanho(matrizB[0])
+    Senão: 
+        linhasA <- tamanho(matrizA)
+        colunasB <- tamanho(matrizB[0])
 
-    matrizResultado <- novaMatriz(linhasA, colunasB, inicializada com zeros)
+        matrizResultado <- novaMatriz(linhasA, colunasB, inicializada com zeros)
 
     Para i de 0 até linhasA - 1 faça:
         Para j de 0 até colunasB - 1 faça:
